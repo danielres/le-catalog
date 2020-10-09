@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY yarn.lock .
 COPY package.json .
 
-RUN yarn --prod --frozen-lockfile
+RUN yarn --frozen-lockfile
 
 COPY . .
 
