@@ -9,6 +9,8 @@ RUN yarn --prod --frozen-lockfile
 
 COPY . .
 
+RUN yarn build
+
 EXPOSE 3000
 
 # Start the server within the container:
