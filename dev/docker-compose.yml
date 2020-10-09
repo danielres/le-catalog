@@ -4,7 +4,9 @@ services:
   server:
     build: "../server"
     ports:
-      - 3001:3001
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      PORT: "${SERVER_PORT}"
     command: sh -c "yarn && yarn dev"
     volumes:
       - ../server:/usr/src/app
@@ -12,7 +14,9 @@ services:
   ui:
     build: "../ui"
     ports:
-      - 3000:3000
+      - "${UI_PORT}:${UI_PORT}"
+    environment:
+      PORT: "${UI_PORT}"
     command: sh -c "yarn && yarn dev"
     volumes:
       - ../ui:/usr/src/app
@@ -22,14 +26,14 @@ services:
     command: "-c logging_collector=on"
     restart: always
     ports:
-      - 5432:5432
+      - "${PG_PORT}:5432"
     environment:
-      POSTGRES_PASSWORD: changeme
-      POSTGRES_USER: changeme
-      POSTGRES_DB: changeme
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB}
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 5000:5000
+      - ${ADMINER_PORT}:8080
