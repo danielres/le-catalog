@@ -1,0 +1,17 @@
+image: node:14-alpine
+
+variables:
+  FOO: BAR
+
+services:
+  - postgres:11.1
+
+cache:
+  paths:
+    - node_modules/
+
+build-ui:
+  script:
+    - cd ui
+    - yarn --frozen-lockfile
+    - yarn build
